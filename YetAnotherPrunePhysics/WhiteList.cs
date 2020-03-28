@@ -15,9 +15,27 @@ namespace YetAnotherPrunePhysics
         {
             if (!partWhiteList.TryGetValue(part.name, out var result))
             {
+                result = Identify(part);
+            }
+            return result;
+        }
+
+        private static bool Identify(AvailablePart part)
+        {
+            bool result = default;
+            try
+            {
                 result = CanPrunePhysics(part);
                 partWhiteList.Add(part.name, result);
+                Debug.Log(part.name);
             }
+            catch (Exception e)
+            {
+                Debug.LogError($"YAPP: error identifying part {part.name}");
+                Debug.LogException(e);
+                partWhiteList.Add(part.name, false);
+            }
+
             return result;
         }
 

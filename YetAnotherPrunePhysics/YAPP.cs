@@ -27,7 +27,6 @@
         private bool CanPrune()
         {
             return part
-                && !part.sameVesselCollision
                 && !part.isVesselEVA
                 && WhiteList.IsInWhiteList(part.partInfo);
         }
