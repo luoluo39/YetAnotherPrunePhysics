@@ -69,6 +69,9 @@ namespace YetAnotherPrunePhysics
 
         private static bool CanPrunePhysics(AvailablePart part)
         {
+            if (part.partPrefab.isRobotic())
+                return false;
+            
             foreach (var item in part.partPrefab.Modules)
                 if (!CheckName(item.GetType().Name))
                     return false;
