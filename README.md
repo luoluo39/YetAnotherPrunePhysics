@@ -31,5 +31,4 @@ Module.*
 ```
 
 ## Known Issues
-* Parts with YAPP enabled will simply disappear when destroyed instead of exploding and sometimes all child parts will also disappear.
-* Cannot be used on robotics parts.
+* Cause stutters when destroying parts.
