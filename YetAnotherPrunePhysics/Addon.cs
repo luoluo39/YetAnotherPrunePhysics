@@ -12,24 +12,36 @@ namespace YetAnotherPrunePhysics
     [KSPAddon(KSPAddon.Startup.EveryScene, false)]
     public sealed class Addon : MonoBehaviour
     {
+        private static bool _loaded = false;
         private void Awake()
         {
+            if (!_loaded)
+            {
+
+                WhiteList.ReadWhiteList();
+                _loaded = true;
+            }
             GameEvents.onPartWillDie.Add(OnPartDie);
+
+            if (CollisionManager.Instance && !(CollisionManager.Instance is CollisionManagerOverride))
+            {
+                CollisionManager.Instance.gameObject.AddComponent<CollisionManagerOverride>();
+            }
+        }
+
+        private void OnDestroy()
+        {
+            GameEvents.onPartWillDie.Remove(OnPartDie);
         }
 
         private void OnPartDie(Part data)
         {
             foreach (var part in data.children)
             {
-                ProcessPart(part);
-            }
-
-            void ProcessPart(Part part)
-            {
                 var module = part.FindModuleImplementing<YAPP>();
-                if (module && module.yappEnabled)
+                if (module && module.yappEnabled && part.physicalSignificance == Part.PhysicalSignificance.NONE)
                 {
-                   part. PromoteToPhysicalPart();
+                    part.PromoteToPhysicalPart();
                 }
             }
         }

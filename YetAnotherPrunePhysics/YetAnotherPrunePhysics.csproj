@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Addon.cs" />
+    <Compile Include="CollisionManagerOverride.cs" />
     <Compile Include="WhiteList.cs" />
     <Compile Include="YAPP.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
