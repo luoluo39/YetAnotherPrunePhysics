@@ -71,7 +71,7 @@ namespace YetAnotherPrunePhysics
         {
             if (part.partPrefab.isRobotic())
                 return false;
-            
+
             foreach (var item in part.partPrefab.Modules)
                 if (!CheckName(item.GetType().Name))
                     return false;
@@ -80,8 +80,6 @@ namespace YetAnotherPrunePhysics
 
         private static bool CheckName(string name)
         {
-            if (whiteList == null)
-                ReadWhiteList();
             for (int i = 0; i < whiteList.Count; i++)
             {
                 Regex re = whiteList[i];

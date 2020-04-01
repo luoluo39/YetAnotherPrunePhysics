@@ -6,10 +6,10 @@
             KSPField(guiName = "#loc_yapp_button", isPersistant = true, guiActive = true, guiActiveEditor = true)]
         public bool yappEnabled = false;
 
-        public override void OnInitialize()
+        public override void OnStart(StartState state)
         {
-            base.OnInitialize();
-            bool flag = CanPrune();
+            base.OnStart(state); 
+            var flag = CanPrune();
 
             var field = Fields[nameof(yappEnabled)];
             field.guiActive = flag;
